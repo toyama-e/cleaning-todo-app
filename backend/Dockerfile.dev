@@ -1,0 +1,19 @@
+FROM ruby:3.2.9
+
+# 必要な Linux パッケージ
+RUN apt-get update -qq && \
+    apt-get install -y build-essential libpq-dev nodejs npm && \
+    rm -rf /var/lib/apt/lists/*
+
+# 作業ディレクトリ
+WORKDIR /app
+
+# Gemfile だけ先にコピー（bundle install キャッシュ用）
+COPY Gemfile Gemfile.lock ./
+
+RUN bundle install
+
+# ソースコードをマウントして使う（Compose の volumes で上書きされる）
+COPY . .
+
+CMD ["rails", "server", "-b", "0.0.0.0"]
