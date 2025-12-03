@@ -7,4 +7,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  # localhost:3000/tasks
+  resouces :tasks, only:[:index, :new, :create]
 end
