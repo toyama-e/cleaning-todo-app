@@ -7,4 +7,7 @@ RUN npm install
 
 COPY . .
 
+# .env.local をコンテナ内へコピー
+COPY .env.local .env.local
+
 CMD ["npm", "run", "dev"]
