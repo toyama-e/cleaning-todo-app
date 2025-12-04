@@ -24,8 +24,8 @@ areas = [
 
 # タスク（1月のカレンダーに合わせて）
 Task.find_or_create_by!(
-  date: Date.new(2026, 1, 4),
-  time: "10:00",
+  name:"お風呂掃除",
+  do_at: DateTime.new(2026, 1, 4, 10, 0),
   cleaning_area: areas[1],
   user: users[0],
   status: "完了",
@@ -33,8 +33,8 @@ Task.find_or_create_by!(
 )
 
 Task.find_or_create_by!(
-  date: Date.new(2026, 1, 10),
-  time: "09:30",
+  name:"トイレ掃除",
+  do_at: DateTime.new(2026, 1, 10, 9, 30),
   cleaning_area: areas[0],
   user: users[1],
   status: "未完了",
@@ -42,8 +42,8 @@ Task.find_or_create_by!(
 )
 
 Task.find_or_create_by!(
-  date: Date.new(2026, 1, 11),
-  time: "10:00",
+  name: "コンロ掃除",
+  do_at: DateTime.new(2026, 1, 11, 10, 0),
   cleaning_area: areas[1],
   user: users[1],
   status: "未完了",
@@ -51,11 +51,10 @@ Task.find_or_create_by!(
 )
 
 Task.find_or_create_by!(
-  date: Date.new(2026, 1, 11),
-  time: "11:00",
+  name:"お風呂掃除",
+  do_at: DateTime.new(2026, 1, 11, 11, 0),
   cleaning_area: areas[0],
   user: users[0],
   status: "完了",
   memo: ""
 )
-
