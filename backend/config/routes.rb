@@ -7,8 +7,12 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  # API routes
+
+  # localhost:4000/api/v1/tasks
   namespace :api do
-    resources :users, only: [:index]
+    namespace :v1 do
+      resources :tasks
+      resources :users, only: [:index]
+    end
   end
 end
