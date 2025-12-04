@@ -8,5 +8,5 @@ Rails.application.routes.draw do
     resources :tasks
     resources :users, only: [:index]
     resources :cleaning_areas, only: [:index]
-    end
   end
+end
