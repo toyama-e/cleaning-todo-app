@@ -4,14 +4,13 @@ import { useState, useEffect } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import { CalendarEvent } from '../lib/types';
 
 
 export default function CleaningCalendar() {
-  const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const [events, setEvents] = useState<Tasks[]>([]);
 
   useEffect(() => {
-    const sampleEvents: CalendarEvent[] = [
+    const sampleEvents: Tasks[] = [
       {
         id: '1',
         title: 'トイレ掃除 - Aさん',
