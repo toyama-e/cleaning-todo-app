@@ -12,6 +12,6 @@ Rails.application.routes.draw do
   namespace :api do
     resources :tasks
     resources :users, only: [:index]
+    resources :cleaning_areas, only: [:index]
     end
   end
-end
