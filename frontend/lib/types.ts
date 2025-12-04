@@ -1,10 +1,10 @@
 export type Task = {
-  id: number;
+  id?: number;
   name: string;
   cleaning_area_id: number;
-  do_at: string | null;
-  done_at: string | null;
-  memo: string | null;
-  status: string | null;
+  do_at: string;
+  done_at?: string | null;
+  memo?: string;
+  status: string;
   user_id: number;
 };
