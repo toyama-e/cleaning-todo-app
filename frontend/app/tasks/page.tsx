@@ -8,7 +8,12 @@ import { useRouter } from "next/navigation";
 export default function TodayTasksPage() {
   const router = useRouter();
 
-  // ⭐ ここは mock データ（API 完成まで一時使用）
+  // ⭐ 新規登録ページへ遷移
+  const handleCreate = () => {
+    router.push("/tasks/create");
+  };
+
+  // ⭐ mock データ（API 完成まで一時使用）
   const mockTasks: Task[] = [
     {
       id: 1,
@@ -34,10 +39,9 @@ export default function TodayTasksPage() {
 
   const [tasks, setTasks] = useState<Task[]>([]);
 
-  // 🔥 API ができたらこの中を書き換える
   useEffect(() => {
     // ---------------------------
-    // 本来の API 処理：いまはコメントアウト
+    // API ができたらコメントアウト解除
     //
     // const fetchTasks = async () => {
     //   const res = await fetch("http://localhost:4000/tasks/today");
@@ -51,21 +55,11 @@ export default function TodayTasksPage() {
     setTasks(mockTasks);
   }, []);
 
-  // 編集ページへ移動
   const handleEdit = (id: number) => {
     router.push(`/tasks/${id}/edit`);
   };
 
-  // 削除（mockなので画面上だけ反映）
   const handleDelete = (id: number) => {
-    // ---------------------------
-    // 本来の API 処理（いまはコメントアウト）
-    //
-    // await fetch(`http://localhost:4000/tasks/${id}`, { method: "DELETE" });
-    // fetchTasks();
-    // ---------------------------
-
-    // ⭐ mock では画面上のデータだけ更新
     setTasks((prev) => prev.filter((t) => t.id !== id));
   };
 
@@ -83,11 +77,31 @@ export default function TodayTasksPage() {
           fontSize: "28px",
           fontWeight: "bold",
           color: "white",
-          marginBottom: "30px",
+          marginBottom: "20px",
         }}
       >
         今日のお掃除タスク
       </h1>
+
+      {/* ⭐ 新規登録ボタン */}
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <button
+          onClick={handleCreate}
+          style={{
+            padding: "12px 28px",
+            backgroundColor: "#f8d348",
+            border: "2px solid white",
+            borderRadius: "24px",
+            color: "#007b83",
+            fontWeight: "bold",
+            marginBottom: "30px",
+            cursor: "pointer",
+            boxShadow: "0 3px 6px rgba(0,0,0,0.15)",
+          }}
+        >
+          新規登録
+        </button>
+      </div>
 
       <div
         style={{
