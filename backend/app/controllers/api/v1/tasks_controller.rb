@@ -1,7 +1,7 @@
 class Api::V1::TasksController < ApplicationController
 
     # show / update / destroy のときだけ set_task メソッドを実行
-    before_action : set_task, only:[:show, :update, :destroy]
+    before_action :set_task, only: [:show, :update, :destroy]
 
     # GET /api/v1/tasks
     def index
