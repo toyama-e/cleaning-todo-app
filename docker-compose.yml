@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile.dev
     container_name: cleaning_backend
     ports:
-      - "4000:4000"
+      - "4000:3000"
     environment:
       DATABASE_HOST: db
       DATABASE_USER: root
