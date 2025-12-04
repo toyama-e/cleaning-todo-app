@@ -1,22 +1,22 @@
-class Api::V1::TasksController < ApplicationController
+class Api::TasksController < ApplicationController
 
     # show / update / destroy のときだけ set_task メソッドを実行
     before_action :set_task, only: [:show, :update, :destroy]
 
-    # GET /api/v1/tasks
+    # GET /api/tasks
     def index
         # 取得した全TaskをJSONとしてクライアントに返す
         tasks = Task.all
         render json: tasks
     end
 
-    # GET /api/v1/tasks/:id
+    # GET /api/tasks/:id
     def show
         # 取得した特定の1つのTaskをJSONとしてクライアントに返す
         render json: @task
     end
 
-    # POST /api/v1/tasks
+    # POST /api/tasks
     def create
         # 新しいTaskを作成する (Create)
         @task = Task.new(task_params)
@@ -30,7 +30,7 @@ class Api::V1::TasksController < ApplicationController
         end
     end
 
-    # PATCH/PUT /api/v1/tasks/:id
+    # PATCH/PUT /api/tasks/:id
     def update
         # Taskを更新
         if @task.update(task_params)
@@ -42,7 +42,7 @@ class Api::V1::TasksController < ApplicationController
         end
     end    
 
-    # DELETE /api/v1/tasks/:id
+    # DELETE /api/tasks/:id
     def destroy
         # Taskを削除
         @task.destroy
