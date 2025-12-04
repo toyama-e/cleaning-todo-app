@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  # localhost:4000/api/v1/tasks
+  # localhost:4000/api/tasks
   namespace :api do
     resources :tasks
     resources :users, only: [:index]
