@@ -4,9 +4,22 @@ import { useState, useEffect } from "react";
 import TaskItem from "@/components/TaskItem";
 import { Task } from "@/lib/types";
 import { useRouter } from "next/navigation";
+import { auth } from "@/lib/firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 export default function TodayTasksPage() {
   const router = useRouter();
+
+  //onAuthStateChanged　ユーザーの認証状態の変化をリアルタイムに監視するための関数
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        router.push("/404");
+      }
+    });
+
+    return () => unsub();
+  }, [auth, router]);
 
   // ⭐ 新規登録ページへ遷移
   const handleCreate = () => {
