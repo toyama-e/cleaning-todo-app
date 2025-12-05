@@ -1,13 +1,12 @@
-version: "3.9"
-
 services:
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile.dev
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b 0.0.0.0 -p 3000"
     container_name: cleaning_backend
     ports:
-      - "4000:4000"
+      - "4000:3000"
     environment:
       DATABASE_HOST: db
       DATABASE_USER: root
@@ -27,6 +26,8 @@ services:
       - "3000:3000"
     volumes:
       - ./frontend:/app
+    env_file:
+      - ./frontend/.env.local
     depends_on:
       - backend
 
