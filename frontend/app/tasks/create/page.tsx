@@ -12,13 +12,14 @@ export default function CreateTaskPage() {
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
-      if (!user) {
+      // 未ログイン → 404 へ
+      if (user === null) {
         router.push("/404");
       }
     });
 
     return () => unsub();
-  }, [router]);
+  }, [auth, router]);
 
   const handleSubmit = async (task: Omit<Task, "id">) => {
     const res = await fetch("http://localhost:4000/api/tasks", {
