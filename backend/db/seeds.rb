@@ -11,8 +11,7 @@
 # 担当者
 users = [
   User.find_or_create_by!(name: "Aさん"),
-  User.find_or_create_by!(name: "Bさん"),
-  User.find_or_create_by!(name: "Cさん")
+  User.find_or_create_by!(name: "Bさん")
 ]
 
 # 掃除箇所
@@ -44,7 +43,7 @@ Task.find_or_create_by!(
 Task.find_or_create_by!(
   name: "コンロ掃除",
   do_at: DateTime.new(2025, 12, 13, 12, 0),
-  cleaning_area: areas[1],
+  cleaning_area: areas[2],
   user: users[1],
   status: "未完了",
   memo: ""
