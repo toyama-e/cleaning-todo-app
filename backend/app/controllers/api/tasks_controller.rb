@@ -10,6 +10,12 @@ class Api::TasksController < ApplicationController
         render json: tasks
     end
 
+    # GET /api/tasks/today
+    def today
+        tasks = Task.where(do_at: Date.today.all_day)
+        render json: tasks
+    end
+
     # GET /api/tasks/:id
     def show
         # 取得した特定の1つのTaskをJSONとしてクライアントに返す
