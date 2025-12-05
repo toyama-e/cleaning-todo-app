@@ -3,9 +3,22 @@
 import TaskForm from "@/components/TaskForm";
 import { useRouter } from "next/navigation";
 import { Task } from "@/lib/types";
+import { useState, useEffect } from "react";
+import { auth } from "@/lib/firebase";
+import { onAuthStateChanged } from "firebase/auth";
 
 export default function CreateTaskPage() {
   const router = useRouter();
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        router.push("/404");
+      }
+    });
+
+    return () => unsub();
+  }, [router]);
 
   const handleSubmit = async (task: Omit<Task, "id">) => {
     const res = await fetch("http://localhost:4000/api/tasks", {
