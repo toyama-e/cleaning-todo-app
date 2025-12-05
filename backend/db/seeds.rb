@@ -22,10 +22,10 @@ areas = [
   CleaningArea.find_or_create_by!(name: "コンロ")
 ]
 
-# タスク（1月のカレンダーに合わせて）
+# タスク（12月のカレンダーに合わせて）
 Task.find_or_create_by!(
   name:"お風呂掃除",
-  do_at: DateTime.new(2026, 1, 4, 10, 0),
+  do_at: DateTime.new(2025, 12, 4, 10, 0),
   cleaning_area: areas[1],
   user: users[0],
   status: "完了",
@@ -34,7 +34,7 @@ Task.find_or_create_by!(
 
 Task.find_or_create_by!(
   name:"トイレ掃除",
-  do_at: DateTime.new(2026, 1, 10, 9, 30),
+  do_at: DateTime.new(2025, 12, 5, 9, 00),
   cleaning_area: areas[0],
   user: users[1],
   status: "未完了",
@@ -43,7 +43,7 @@ Task.find_or_create_by!(
 
 Task.find_or_create_by!(
   name: "コンロ掃除",
-  do_at: DateTime.new(2026, 1, 11, 10, 0),
+  do_at: DateTime.new(2025, 12, 13, 12, 0),
   cleaning_area: areas[1],
   user: users[1],
   status: "未完了",
@@ -52,7 +52,7 @@ Task.find_or_create_by!(
 
 Task.find_or_create_by!(
   name:"お風呂掃除",
-  do_at: DateTime.new(2026, 1, 11, 11, 0),
+  do_at: DateTime.new(2025, 12, 13, 11, 0),
   cleaning_area: areas[0],
   user: users[0],
   status: "完了",
