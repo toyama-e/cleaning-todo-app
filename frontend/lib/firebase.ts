@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp, getApps, getApp } from "firebase/app";
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -15,13 +15,17 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID!,
 };
 
-const app = initializeApp(firebaseConfig);
+// 既に初期化されたアプリがあるかチェック
+const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+
+// 認証
 export const auth = getAuth(app);
 
+// API ショートカット
 export const loginWithEmail = (email: string, password: string) =>
   signInWithEmailAndPassword(auth, email, password);
 
 export const signupWithEmail = (email: string, password: string) =>
-  createUserWithEmailAndPassword(auth, email, password);
+  createUserWithEmailAndEmailAndPassword(auth, password);
 
 export const logout = () => signOut(auth);
