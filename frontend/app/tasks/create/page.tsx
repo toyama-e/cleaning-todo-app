@@ -20,7 +20,7 @@ export default function CreateTaskPage() {
     }
 
     alert("登録しました！");
-    router.push("/tasks/today");
+    router.push("/calendar");
   };
 
   return (
