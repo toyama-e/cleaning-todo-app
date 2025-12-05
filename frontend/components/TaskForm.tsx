@@ -13,7 +13,7 @@ type Props = {
 export default function TaskForm({ onSubmit }: Props) {
   const router = useRouter();
 
-  // 認証チェックはここに置く
+  // 認証チェック
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
       if (!user) {
@@ -36,7 +36,10 @@ export default function TaskForm({ onSubmit }: Props) {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
+    setForm({
+      ...form,
+      [name]: name === "cleaning_area_id" || name === "user_id" ? Number(value) : value,
+    });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -98,7 +101,6 @@ export default function TaskForm({ onSubmit }: Props) {
       <select name="user_id" value={form.user_id} onChange={handleChange} style={inputStyle}>
         <option value={1}>Aさん</option>
         <option value={2}>Bさん</option>
-        <option value={3}>Cさん</option>
       </select>
 
       <label>メモ</label>

@@ -27,53 +27,77 @@ export default function TodayTasksPage() {
   };
 
   // ⭐ mock データ（API 完成まで一時使用）
-  const mockTasks: Task[] = [
-    {
-      id: 1,
-      name: "キッチン掃除",
-      cleaning_area_id: 1,
-      do_at: "2025-12-03T09:00:00",
-      done_at: null,
-      memo: "油汚れ強め",
-      status: "not_started",
-      user_id: 1,
-    },
-    {
-      id: 2,
-      name: "お風呂掃除",
-      cleaning_area_id: 2,
-      do_at: "2025-12-03T10:00:00",
-      done_at: "2025-12-03T10:30:00",
-      memo: "",
-      status: "done",
-      user_id: 2,
-    },
-  ];
+  // const mockTasks: Task[] = [
+  //   {
+  //     id: 1,
+  //     name: "キッチン掃除",
+  //     cleaning_area_id: 1,
+  //     do_at: "2025-12-03T09:00:00",
+  //     done_at: null,
+  //     memo: "油汚れ強め",
+  //     status: "not_started",
+  //     user_id: 1,
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "お風呂掃除",
+  //     cleaning_area_id: 2,
+  //     do_at: "2025-12-03T10:00:00",
+  //     done_at: "2025-12-03T10:30:00",
+  //     memo: "",
+  //     status: "done",
+  //     user_id: 2,
+  //   },
+  // ];
 
   const [tasks, setTasks] = useState<Task[]>([]);
 
-  useEffect(() => {
-    // ---------------------------
-    // API ができたらコメントアウト解除
-    //
-    // const fetchTasks = async () => {
-    //   const res = await fetch("http://localhost:4000/tasks/today");
-    //   const data = await res.json();
-    //   setTasks(data);
-    // };
-    // fetchTasks();
-    // ---------------------------
+  const areaNameMap: Record<number, string> = {
+    1: "トイレ",
+    2: "お風呂",
+    3: "換気扇",
+  };
 
-    // ⭐ mock をセット
-    setTasks(mockTasks);
+  const userNameMap: Record<number, string> = {
+    1: "Aさん",
+    2: "Bさん",
+  };
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      const res = await fetch("http://localhost:4000/api/tasks/today");
+      if (!res.ok) {
+        console.error("APIエラー:", res.status);
+        return;
+      }
+      const data = await res.json();
+      setTasks(data);
+    };
+    fetchTasks();
+
+    //   // ⭐ mock をセット
+    //   setTasks(mockTasks);
   }, []);
 
   const handleEdit = (id: number) => {
     router.push(`/tasks/${id}/edit`);
   };
 
-  const handleDelete = (id: number) => {
+  const handleDelete = async (id: number) => {
+    const ok = confirm("本当に削除しますか？");
+    if (!ok) return;
+
+    const res = await fetch(`http://localhost:4000/api/tasks/${id}`, {
+      method: "DELETE",
+    });
+
+    if (!res.ok) {
+      alert("削除に失敗しました");
+      return;
+    }
     setTasks((prev) => prev.filter((t) => t.id !== id));
+
+    alert("削除しました");
   };
 
   return (
@@ -128,8 +152,8 @@ export default function TodayTasksPage() {
             key={task.id}
             task={{
               ...task,
-              cleaning_area_name: task.cleaning_area_id === 1 ? "換気扇" : "浴槽",
-              user_name: task.user_id === 1 ? "Aさん" : "Bさん",
+              cleaning_area_name: areaNameMap[task.cleaning_area_id] ?? "不明",
+              user_name: userNameMap[task.user_id] ?? "不明",
             }}
             onEdit={handleEdit}
             onDelete={handleDelete}
