@@ -43,12 +43,12 @@ export default function TodayTasksPage() {
     // ---------------------------
     // API ができたらコメントアウト解除
     //
-    // const fetchTasks = async () => {
-    //   const res = await fetch("http://localhost:4000/tasks/today");
-    //   const data = await res.json();
-    //   setTasks(data);
-    // };
-    // fetchTasks();
+    //  const fetchTasks = async () => {
+    //    const res = await fetch("http://localhost:4000/tasks/today");
+    //     const data = await res.json();
+    //     setTasks(data);
+    //   };
+    //   fetchTasks();
     // ---------------------------
 
     // ⭐ mock をセット
@@ -115,7 +115,8 @@ export default function TodayTasksPage() {
             key={task.id}
             task={{
               ...task,
-              cleaning_area_name: task.cleaning_area_id === 1 ? "換気扇" : "浴槽",
+              cleaning_area_name:
+                task.cleaning_area_id === 1 ? "換気扇" : "浴槽",
               user_name: task.user_id === 1 ? "Aさん" : "Bさん",
             }}
             onEdit={handleEdit}
