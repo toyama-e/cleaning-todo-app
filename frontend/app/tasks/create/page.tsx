@@ -8,7 +8,7 @@ export default function CreateTaskPage() {
   const router = useRouter();
 
   const handleSubmit = async (task: Omit<Task, "id">) => {
-    const res = await fetch("http://localhost:4000/api/v1/tasks", {
+    const res = await fetch("http://localhost:4000/api/tasks", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ task }),
@@ -20,7 +20,7 @@ export default function CreateTaskPage() {
     }
 
     alert("登録しました！");
-    router.push("/tasks");
+    router.push("/tasks/today");
   };
 
   return (
