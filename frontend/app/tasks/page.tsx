@@ -13,7 +13,8 @@ export default function TodayTasksPage() {
   //onAuthStateChanged　ユーザーの認証状態の変化をリアルタイムに監視するための関数
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
-      if (!user) {
+      // 未ログイン → 404 へ
+      if (user === null) {
         router.push("/404");
       }
     });
