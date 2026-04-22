@@ -1,4 +1,4 @@
-FROM ruby:3.2.9
+FROM ruby:3.2.11
 
 # 必要な Linux パッケージ
 RUN apt-get update -qq && \
